@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vilém - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="kontakt.css">
+</head>
+<body>
+  <header>
+    <img src="index/img/background.png" alt="Pozadí" class="background">
+    <nav class="nav">
+      <button>PROJEKTY</button>
+      <button>STUDIUM</button>
+      <button>O MNĚ</button>
+      <a href="index.html"><button>ÚVOD</button></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <a href="index.html" class="scroll-btn"><img src="index/img/scroll-btn.png" alt=""></a>
+      <div class="bubbles"></div>
+
+      <div class="hero-text">
+        <h1>KONTAKTUJ</h1>
+        <h2>MĚ</h2>
+      </div>
+
+      <img src="index/img/vilem.png" class="person">
+
+      <div class="social-icons">
+        <a href="#"><img src="index/logos/instagram.png" alt="Instagram"></a>
+        <a href="#"><img src="index/logos/discord.png" alt="Discord"></a>
+        <a href="#"><img src="index/logos/facebook.png" alt="Facebook"></a>
+      </div>
+
+      <div class="buttons">
+        <a href="#" class="portfolio-btn">Poslat Zprávu</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const portfolioBtn = document.querySelector('.portfolio-btn');
+  
+    setTimeout(() => {
+      portfolioBtn.classList.add('enlarged');
+  
+      setTimeout(() => {
+        portfolioBtn.classList.remove('enlarged');
+      }, 2000); // Po 3 sekundách odstraní zvětšení
+  
+    }, 7000); // Po 5 sekundách přidá zvětšení
+
+    window.addEventListener('load', function () {
+      document.getElementById('main').classList.add('visible');
+    });
+
+    const scrollBtn = document.querySelector('.scroll-btn');
+// Funkce pro přidání třídy "bouncing" k tlačítku a spuštění animace
+function triggerBounce() {
+  // Přidáme třídu, která spustí animaci
+  scrollBtn.classList.add('bouncing2');
+  // Po 1 sekundě (délce animace) odstraníme třídu, aby se animace nemohla opakovat
+  setTimeout(() => {
+    scrollBtn.classList.remove('bouncing2');
+  }, 1000);  // 1000ms = 1 sekunda
+}
+
+// Spustí funkci triggerBounce každých 5 sekund
+setInterval(triggerBounce, 5000);
+
+  </script>
+</body>
+</html>

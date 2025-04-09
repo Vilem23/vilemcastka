@@ -1,0 +1,42 @@
+body{
+  overflow: hidden;
+}
+
+.hero-text{
+  text-align: right;
+  padding-right: 20px;
+}
+
+.social-icons {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+  border-top: 4px solid white;
+  top: 80%
+}
+
+.buttons {
+  bottom: 5rem;
+  left: 4.7rem;
+}
+
+.scroll-btn img {
+  padding-bottom: 30px;
+  padding-left: 65px;
+  width: 130px;
+  transform:rotateZ(90deg);
+  z-index: 10;
+}
+
+.scroll-btn.bouncing2 {
+  animation: bounce2 1s ease-in-out;
+}
+
+@keyframes bounce2 {
+  0%, 100% {
+      transform: translateX(0);
+  }
+  50% {
+      transform: translateX(-4px);
+  }
+}

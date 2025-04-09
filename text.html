@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fade-in Main</title>
+  <style>
+    #main {
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    #main.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="main">
+    <h1>Ahoj světe!</h1>
+    <p>Tato část se zobrazí pomalu po načtení stránky.</p>
+  </div>
+
+  <script>
+    window.addEventListener('load', function () {
+      document.getElementById('main').classList.add('visible');
+    });
+  </script>
+
+</body>
+</html>

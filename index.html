@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vilém - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="document.body.style.opacity='1'">
+  <header>
+    <img src="index/img/background.png" alt="Pozadí" class="background">
+    <nav class="nav">
+      <button>PROJEKTY</button>
+      <button>STUDIUM</button>
+      <button>O MNĚ</button>
+      <button class="active">ÚVOD</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <!-- Bublinový efekt -->
+      <div class="bubbles"></div>
+
+      <div class="hero-text">
+        <h1>AHOJ, JÁ JSEM</h1>
+        <h2>VILÉM</h2>
+      </div>
+
+      <img src="index/img/vilem.png" class="person">
+
+      <div class="social-icons">
+        <a href="#"><img src="index/logos/instagram.png" alt="Instagram"></a>
+        <a href="#"><img src="index/logos/discord.png" alt="Discord"></a>
+        <a href="#"><img src="index/logos/facebook.png" alt="Facebook"></a>
+      </div>
+
+      <div class="buttons">
+        <a href="#" class="portfolio-btn">MÉ PORTFOLIO</a>
+        <a href="kontakt.html" class="contact-btn">KONTAKTUJ MĚ</a>
+        <a href="#" class="scroll-btn"><img src="index/img/scroll-btn.png" alt=""></a>
+      </div>
+    </section>
+  </main>
+
+  <!-- JS bubliny -->
+  <script>
+    const bubblesContainer = document.querySelector('.bubbles');
+
+    // Pole obrázků pro bubliny
+    const bubbleImages = ['index/icn/icn1.png', 'index/icn/icn2.png', 'index/icn/icn3.png'];
+
+    // Parametry
+    const spawnRate = 0.5; // Kolik bublin se spawne každou sekundu
+    const spawnInterval = 500; // Interval v milisekundách (1 sekunda)
+
+    function createBubble() {
+      const img = document.createElement('img');
+
+      img.src = bubbleImages[Math.floor(Math.random() * bubbleImages.length)];
+      img.classList.add('bubble-img');
+
+      const size = Math.random() * 20 + 10;
+      img.style.height = `${size}px`;
+      img.style.left = `${Math.random() * 100}%`;
+
+      const rotateX = Math.random() * 360;
+      const rotateY = Math.random() * 360;
+      const rotateZ = Math.random() * 360;
+      img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
+
+      img.style.animationDuration = `${5 + Math.random() * 5}s`;
+      img.style.animationDelay = `${Math.random()}s`;
+
+      bubblesContainer.appendChild(img);
+
+      setTimeout(() => {
+        img.remove();
+      }, 10000);
+    }
+
+    // Funkce pro generování bublin na základě spawn rate
+    function spawnBubbles() {
+      for (let i = 0; i < spawnRate; i++) {
+        createBubble();
+      }
+    }
+
+    // Spustíme generování bublin každou sekundu
+    setInterval(spawnBubbles, spawnInterval);
+  
+    // 🔽 Zvětšení tlačítka "MÉ PORTFOLIO"
+    const portfolioBtn = document.querySelector('.portfolio-btn');
+  
+    setTimeout(() => {
+      portfolioBtn.classList.add('enlarged');
+  
+      setTimeout(() => {
+        portfolioBtn.classList.remove('enlarged');
+      }, 2000); // Po 3 sekundách odstraní zvětšení
+  
+    }, 7000); // Po 5 sekundách přidá zvětšení
+
+    const scrollBtn = document.querySelector('.scroll-btn');
+
+// Funkce pro přidání třídy "bouncing" k tlačítku a spuštění animace
+function triggerBounce() {
+  // Přidáme třídu, která spustí animaci
+  scrollBtn.classList.add('bouncing1');
+  // Po 1 sekundě (délce animace) odstraníme třídu, aby se animace nemohla opakovat
+  setTimeout(() => {
+    scrollBtn.classList.remove('bouncing1');
+  }, 1000);  // 1000ms = 1 sekunda
+}
+
+// Spustí funkci triggerBounce každých 5 sekund
+setInterval(triggerBounce, 5000);
+
+window.addEventListener('load', function () {
+      document.getElementById('main').classList.add('visible');
+    });
+
+  </script>
+</body>
+</html>
