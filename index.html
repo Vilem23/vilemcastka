@@ -40,8 +40,27 @@
         <a href="kontakt.html" class="contact-btn">KONTAKTUJ MĚ</a>
         <a href="#" class="scroll-btn"><img src="index/img/scroll-btn.png" alt=""></a>
       </div>
-      
     </section>
+    <section2>
+      <div class="flexbox1">
+        <img src="index/img/background.png" alt="Pozadí" class="background">
+
+        <div class="hero-text2">
+          <h1>NĚCO</h1>
+          <h2>O MNĚ</h2>
+
+          <div class="rotator">
+            <div class="item">ZÁLIBY</div>
+            <div class="item">KONÍČKY</div>
+            <div class="item active">ZÁKLADY</div>
+            <div class="item">FILMY</div>
+            <div class="item">RODINA</div>
+          </div>
+        </div>
+
+      </div>
+      
+    </section2>
   </main>
 
   <!-- JS bubliny -->
@@ -120,6 +139,35 @@ setInterval(triggerBounce, 5000);
 window.addEventListener('load', function () {
       document.getElementById('main').classList.add('visible');
     });
+
+    const items = document.querySelectorAll('.rotator .item');
+    let currentIndex = 2; // Výchozí aktivní index (ZÁKLADY)
+
+    function updateClasses() {
+      items.forEach((item, i) => {
+        item.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => {
+        if (i === currentIndex) return;
+
+        const total = items.length;
+        const offset = i - currentIndex;
+        const values = Array.from(items).map(el => el.textContent);
+        const rotated = values.map((_, idx) => values[(idx + offset + total) % total]);
+
+        items.forEach((el, idx) => {
+          el.textContent = rotated[idx];
+        });
+
+        currentIndex = 2; // Resetujeme aktivní střední index
+        updateClasses();
+      });
+    });
+
+    updateClasses();
 
   </script>
 </body>
