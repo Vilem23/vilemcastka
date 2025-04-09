@@ -49,14 +49,20 @@
           <h1>NĚCO</h1>
           <h2>O MNĚ</h2>
 
-          <div class="rotator">
-            <div class="item">ZÁLIBY</div>
-            <div class="item">KONÍČKY</div>
-            <div class="item active">ZÁKLADY</div>
-            <div class="item">FILMY</div>
-            <div class="item">RODINA</div>
+          <div class="rotator-wrapper">
+            <div class="arrow up">▲</div>
+          
+            <div class="rotator">
+              <div class="item" data-url="zaliby.html">ZÁLIBY</div>
+              <div class="item" data-url="konicky.html">KONÍČKY</div>
+              <div class="item active" data-url="zaklady.html">ZÁKLADY</div>
+              <div class="item" data-url="filmy.html">FILMY</div>
+              <div class="item" data-url="rodina.html">RODINA</div>
+            </div>
+          
+            <div class="arrow down">▼</div>
           </div>
-        </div>
+          
 
       </div>
       
@@ -141,33 +147,80 @@ window.addEventListener('load', function () {
     });
 
     const items = document.querySelectorAll('.rotator .item');
-    let currentIndex = 2; // Výchozí aktivní index (ZÁKLADY)
+let currentIndex = 2; // Výchozí aktivní index (ZÁKLADY)
 
-    function updateClasses() {
-      items.forEach((item, i) => {
-        item.classList.toggle('active', i === currentIndex);
+function updateClasses() {
+  items.forEach((item, i) => {
+    item.classList.toggle('active', i === currentIndex);
+  });
+}
+
+items.forEach((item, i) => {
+  item.addEventListener('click', () => {
+    if (i === currentIndex) {
+      // ✅ Pokud je kliknutý aktivní – přesměruj na adresu
+      const url = item.getAttribute('data-url');
+      if (url) {
+        window.location.href = url;
+      }
+    } else {
+      // 🔄 Pokud NE – otočíme seznam
+      const total = items.length;
+      const offset = i - currentIndex;
+      const texts = Array.from(items).map(el => el.textContent);
+      const urls = Array.from(items).map(el => el.getAttribute('data-url'));
+
+      // Rotuj texty a adresy
+      const rotatedTexts = texts.map((_, idx) => texts[(idx + offset + total) % total]);
+      const rotatedUrls = urls.map((_, idx) => urls[(idx + offset + total) % total]);
+
+      items.forEach((el, idx) => {
+        el.textContent = rotatedTexts[idx];
+        el.setAttribute('data-url', rotatedUrls[idx]);
       });
+
+      currentIndex = 2; // Znovu nastavit aktivní střed
+      updateClasses();
     }
+  });
+});
 
-    items.forEach((item, i) => {
-      item.addEventListener('click', () => {
-        if (i === currentIndex) return;
+updateClasses();
 
-        const total = items.length;
-        const offset = i - currentIndex;
-        const values = Array.from(items).map(el => el.textContent);
-        const rotated = values.map((_, idx) => values[(idx + offset + total) % total]);
+const arrowUp = document.querySelector('.arrow.up');
+const arrowDown = document.querySelector('.arrow.down');
 
-        items.forEach((el, idx) => {
-          el.textContent = rotated[idx];
-        });
+arrowUp.addEventListener('click', () => {
+  rotateItems(-1);
+});
 
-        currentIndex = 2; // Resetujeme aktivní střední index
-        updateClasses();
-      });
-    });
+arrowDown.addEventListener('click', () => {
+  rotateItems(1);
+});
 
-    updateClasses();
+function rotateItems(direction) {
+  const total = items.length;
+  const texts = Array.from(items).map(el => el.textContent);
+  const urls = Array.from(items).map(el => el.getAttribute('data-url'));
+
+  // Rotace podle směru
+  const rotatedTexts = direction === 1
+    ? [...texts.slice(-1), ...texts.slice(0, -1)]
+    : [...texts.slice(1), texts[0]];
+    
+  const rotatedUrls = direction === 1
+    ? [...urls.slice(-1), ...urls.slice(0, -1)]
+    : [...urls.slice(1), urls[0]];
+
+  items.forEach((el, idx) => {
+    el.textContent = rotatedTexts[idx];
+    el.setAttribute('data-url', rotatedUrls[idx]);
+  });
+
+  currentIndex = 2; // Střední pozice
+  updateClasses();
+}
+
 
   </script>
 </body>
