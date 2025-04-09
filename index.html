@@ -9,16 +9,18 @@
 <body onload="document.body.style.opacity='1'">
   <header>
     <nav class="nav">
-      <button>PROJEKTY</button>
-      <button>STUDIUM</button>
-      <button>O MNĚ</button>
-      <button class="active">ÚVOD</button>
+      <nav class="nav">
+        <button data-section="section1"><a href="#section1">ÚVOD</a></button>
+        <button data-section="section2"><a href="#section2">O MNĚ</a></button>
+        <button data-section="section3">STUDIUM</button>
+        <button data-section="section4">PROJEKTY</button>
+      </nav>
     </nav>
   </header>
 
   <main id="main">
     <img src="index/img/background.png" alt="Pozadí" class="background">
-    <section class="hero">
+    <section class="hero" id="section1">
       <!-- Bublinový efekt -->
       <div class="bubbles"></div>
 
@@ -38,10 +40,10 @@
       <div class="buttons">
         <a href="#" class="portfolio-btn">MÉ PORTFOLIO</a>
         <a href="kontakt.html" class="contact-btn">KONTAKTUJ MĚ</a>
-        <a href="#" class="scroll-btn"><img src="index/img/scroll-btn.png" alt=""></a>
+        <a href="#section2" class="scroll-btn"><img src="index/img/scroll-btn.png" alt=""></a>
       </div>
     </section>
-    <section2>
+    <section id="section2">
       <div class="flexbox1">
         <img src="index/img/background.png" alt="Pozadí" class="background">
 
@@ -66,7 +68,7 @@
 
       </div>
       
-    </section2>
+    </section>
   </main>
 
   <!-- JS bubliny -->
@@ -221,7 +223,27 @@ function rotateItems(direction) {
   updateClasses();
 }
 
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section');
+  const navButtons = document.querySelectorAll('.nav button');
 
+  let currentSectionId = '';
+
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+      currentSectionId = section.id;
+    }
+  });
+
+  navButtons.forEach(btn => {
+    if (btn.dataset.section === currentSectionId) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+});
   </script>
 </body>
 </html>
