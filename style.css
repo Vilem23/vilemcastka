@@ -30,13 +30,16 @@ body {
 }
 
 .nav {
-  top: 0;
-  z-index: 10; /* vyšší než background, ale menší než text atd. */
-  display: flex;
-  justify-content: space-around;
-  padding: 1rem 0;
-  background: transparent;
-  top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem 0;
+    background: rgba(0, 0, 0, 0.7); /* Můžeš upravit průhlednost, aby nebyl úplně neviditelný */
+    backdrop-filter: blur(8px); /* volitelné – pěkný efekt skla */
 }
 
 .nav button {
@@ -61,6 +64,7 @@ body {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  top: 60px;
 }
 
 .background {
@@ -124,7 +128,7 @@ body {
 
 .buttons {
   position: absolute;
-  bottom: 6rem;
+  bottom: 8rem;
   width: 100%;
   display: flex;
   flex-direction: column;
