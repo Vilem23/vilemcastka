@@ -47,11 +47,16 @@
     </section>
     <section id="section2">
       <div class="flexbox1">
-        <img src="index/img/background.png" alt="Pozadí" class="background">
+        <video class="background2" autoplay loop muted>
+          <source src="index/img/background2.mp4" type="video/mp4">
+        </video>
 
         <div class="hero-text2">
           <h1>NĚCO</h1>
           <h2>O MNĚ</h2>
+          <div class="hero-text2-p">
+          <p>Ahoj, jmenuji se Vilém Čstka, narodil jsem se rok 2008 v prosinci, jsem začínající programátor studující vývoj počítačovích technologií a tvorbu her. Vyber si sekci, kterou se chceš o mě dozvědět!</p>
+        </div>
       </div>
       <div class="flexbox-s">
       <section class="scroll-container" id="scrollContainer"></section>
@@ -269,7 +274,6 @@ window.addEventListener('scroll', () => {
   // Inicializace výchozího scrollu
   window.addEventListener("load", () => {
     const middleIndex = Math.floor(allItems.length / 2);
-    allItems[middleIndex].scrollIntoView({ behavior: "auto", block: "center" });
     updateEffects();
   });
 
@@ -283,8 +287,8 @@ window.addEventListener('scroll', () => {
       const distance = Math.abs(centerY - linkCenter);
       const ratio = Math.min(distance / (container.clientHeight / 2), 1);
 
-      const scale = 1 - ratio * 1;
-      const opacity = 1 - ratio * 0.7;
+      const scale = 1 - ratio * 0.9;
+      const opacity = 1 - ratio * 1.2;
 
       link.style.transform = `scale(${scale})`;
       link.style.opacity = opacity.toFixed(2);
