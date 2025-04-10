@@ -107,14 +107,21 @@ body {
   font-family: title;
 }
 
-.person {
+.flexbox-p {
   position: absolute;
+  display: flex;
+  z-index: 2;
+  width: 100%;  
+  justify-content: center;
+  align-items: center;
+}
+
+.person {
+  position: relative;
+  left: 30px;
   top: 100px;
-  left: 55%;
-  transform: translateX(-50%);
   width: 600px;
   object-fit: contain;
-  z-index: 2;
 }
 
 .social-icons {
