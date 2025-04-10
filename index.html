@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Vilém - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="document.body.style.opacity='1'">
+  <header>
+    <nav class="nav">
+      <nav class="nav">
+        <button data-section="section1"><a href="#section1">ÚVOD</a></button>
+        <button data-section="section2"><a href="#section2">O MNĚ</a></button>
+        <button data-section="section3">STUDIUM</button>
+        <button data-section="section4">PROJEKTY</button>
+      </nav>
+    </nav>
+  </header>
+
+  <main id="main">
+    <img src="index/img/background.png" alt="Pozadí" class="background">
+    <section class="hero" id="section1">
+      <!-- Bublinový efekt -->
+      <div class="bubbles"></div>
+
+      <div class="hero-text">
+        <h1>AHOJ, JÁ JSEM</h1>
+        <h2>VILÉM</h2>
+      </div>
+
+      <div class="flexbox-p">
+      <img src="index/img/vilem.png" class="person">
+      </div>
+
+      <div class="social-icons">
+        <a href="#"><img src="index/logos/instagram.png" alt="Instagram"></a>
+        <a href="#"><img src="index/logos/discord.png" alt="Discord"></a>
+        <a href="#"><img src="index/logos/facebook.png" alt="Facebook"></a>
+      </div>
+
+      <div class="buttons">
+        <a href="#" class="portfolio-btn">MÉ PORTFOLIO</a>
+        <a href="kontakt.html" class="contact-btn">KONTAKTUJ MĚ</a>
+        <a href="#section2" class="scroll-btn"><img src="index/img/scroll-btn.png" alt=""></a>
+      </div>
+    </section>
+    <section id="section2">
+      <div class="flexbox1">
+        <video class="background2" autoplay loop muted>
+          <source src="index/img/background2.mp4" type="video/mp4">
+        </video>
+
+        <div class="hero-text2">
+          <h1>NĚCO</h1>
+          <h2>O MNĚ</h2>
+          <div class="hero-text2-p">
+          <p>Ahoj, jmenuji se Vilém Čstka, narodil jsem se rok 2008 v prosinci, jsem začínající programátor studující vývoj počítačovích technologií a tvorbu her. Vyber si sekci, kterou se chceš o mě dozvědět!</p>
+        </div>
+      </div>
+      <div class="flexbox-s">
+      <section class="scroll-container" id="scrollContainer"></section>
+      </div>
+    </section>
+  </main>
+
+  <!-- JS bubliny -->
+  <script>
+    const bubblesContainer = document.querySelector('.bubbles');
+
+    // Pole obrázků pro bubliny
+    const bubbleImages = ['index/icn/icn1.png', 'index/icn/icn2.png', 'index/icn/icn3.png'];
+
+    // Parametry
+    const spawnRate = 0.5; // Kolik bublin se spawne každou sekundu
+    const spawnInterval = 500; // Interval v milisekundách (1 sekunda)
+
+    function createBubble() {
+      const img = document.createElement('img');
+
+      img.src = bubbleImages[Math.floor(Math.random() * bubbleImages.length)];
+      img.classList.add('bubble-img');
+
+      const size = Math.random() * 20 + 10;
+      img.style.height = `${size}px`;
+      img.style.left = `${Math.random() * 100}%`;
+
+      const rotateX = Math.random() * 360;
+      const rotateY = Math.random() * 360;
+      const rotateZ = Math.random() * 360;
+      img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
+
+      img.style.animationDuration = `${5 + Math.random() * 5}s`;
+      img.style.animationDelay = `${Math.random()}s`;
+
+      bubblesContainer.appendChild(img);
+
+      setTimeout(() => {
+        img.remove();
+      }, 10000);
+    }
+
+    // Funkce pro generování bublin na základě spawn rate
+    function spawnBubbles() {
+      for (let i = 0; i < spawnRate; i++) {
+        createBubble();
+      }
+    }
+
+    // Spustíme generování bublin každou sekundu
+    setInterval(spawnBubbles, spawnInterval);
+  
+    // 🔽 Zvětšení tlačítka "MÉ PORTFOLIO"
+    const portfolioBtn = document.querySelector('.portfolio-btn');
+  
+    setTimeout(() => {
+      portfolioBtn.classList.add('enlarged');
+  
+      setTimeout(() => {
+        portfolioBtn.classList.remove('enlarged');
+      }, 2000); // Po 3 sekundách odstraní zvětšení
+  
+    }, 7000); // Po 5 sekundách přidá zvětšení
+
+    const scrollBtn = document.querySelector('.scroll-btn');
+
+// Funkce pro přidání třídy "bouncing" k tlačítku a spuštění animace
+function triggerBounce() {
+  // Přidáme třídu, která spustí animaci
+  scrollBtn.classList.add('bouncing1');
+  // Po 1 sekundě (délce animace) odstraníme třídu, aby se animace nemohla opakovat
+  setTimeout(() => {
+    scrollBtn.classList.remove('bouncing1');
+  }, 1000);  // 1000ms = 1 sekunda
+}
+
+// Spustí funkci triggerBounce každých 5 sekund
+setInterval(triggerBounce, 5000);
+
+window.addEventListener('load', function () {
+      document.getElementById('main').classList.add('visible');
+    });
+
+    const items = document.querySelectorAll('.rotator .item');
+let currentIndex = 2; // Výchozí aktivní index (ZÁKLADY)
+
+function updateClasses() {
+  items.forEach((item, i) => {
+    item.classList.toggle('active', i === currentIndex);
+  });
+}
+
+items.forEach((item, i) => {
+  item.addEventListener('click', () => {
+    if (i === currentIndex) {
+      // ✅ Pokud je kliknutý aktivní – přesměruj na adresu
+      const url = item.getAttribute('data-url');
+      if (url) {
+        window.location.href = url;
+      }
+    } else {
+      // 🔄 Pokud NE – otočíme seznam
+      const total = items.length;
+      const offset = i - currentIndex;
+      const texts = Array.from(items).map(el => el.textContent);
+      const urls = Array.from(items).map(el => el.getAttribute('data-url'));
+
+      // Rotuj texty a adresy
+      const rotatedTexts = texts.map((_, idx) => texts[(idx + offset + total) % total]);
+      const rotatedUrls = urls.map((_, idx) => urls[(idx + offset + total) % total]);
+
+      items.forEach((el, idx) => {
+        el.textContent = rotatedTexts[idx];
+        el.setAttribute('data-url', rotatedUrls[idx]);
+      });
+
+      currentIndex = 2; // Znovu nastavit aktivní střed
+      updateClasses();
+    }
+  });
+});
+
+updateClasses();
+
+const arrowUp = document.querySelector('.arrow.up');
+const arrowDown = document.querySelector('.arrow.down');
+
+arrowUp.addEventListener('click', () => {
+  rotateItems(-1);
+});
+
+arrowDown.addEventListener('click', () => {
+  rotateItems(1);
+});
+
+function rotateItems(direction) {
+  const total = items.length;
+  const texts = Array.from(items).map(el => el.textContent);
+  const urls = Array.from(items).map(el => el.getAttribute('data-url'));
+
+  // Rotace podle směru
+  const rotatedTexts = direction === 1
+    ? [...texts.slice(-1), ...texts.slice(0, -1)]
+    : [...texts.slice(1), texts[0]];
+    
+  const rotatedUrls = direction === 1
+    ? [...urls.slice(-1), ...urls.slice(0, -1)]
+    : [...urls.slice(1), urls[0]];
+
+  items.forEach((el, idx) => {
+    el.textContent = rotatedTexts[idx];
+    el.setAttribute('data-url', rotatedUrls[idx]);
+  });
+
+  currentIndex = 2; // Střední pozice
+  updateClasses();
+}
+
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section');
+  const navButtons = document.querySelectorAll('.nav button');
+
+  let currentSectionId = '';
+
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+      currentSectionId = section.id;
+    }
+  });
+
+  navButtons.forEach(btn => {
+    if (btn.dataset.section === currentSectionId) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+});
+
+
+  </script>
+
+<script>
+  const topics = ["ZÁKLADY", "KONÍČKY", "FILMY", "ZÁLIBY", "RODINA"];
+  const container = document.getElementById("scrollContainer");
+  const LOOP_COUNT = 100;
+  const ITEM_HEIGHT = 20;
+  let allItems = [];
+
+  // Vytvoření položek
+  for (let i = 0; i < LOOP_COUNT; i++) {
+    topics.forEach((topic, index) => {
+      const link = document.createElement("a");
+      link.className = "scroll-items";
+      link.href = `${topic}.html`; // Odkaz na stránku s tématem
+      link.innerHTML = topic;
+      
+      // Vytvoření čísla 1/5 až 5/5
+      const numberOverlay = document.createElement("div");
+      numberOverlay.className = "number-overlay";
+      numberOverlay.innerHTML = `${index + 1}/5`;  // Číslo tématu
+      link.appendChild(numberOverlay);
+
+      const overlay = document.createElement("div");
+      overlay.className = "overlay";
+      link.appendChild(overlay);
+
+      container.appendChild(link);
+      allItems.push(link);
+    });
+  }
+
+  // Inicializace výchozího scrollu
+  window.addEventListener("load", () => {
+    const middleIndex = Math.floor(allItems.length / 2);
+    updateEffects();
+  });
+
+  // Efekt opacity a scale
+  function updateEffects() {
+    const centerY = container.getBoundingClientRect().top + container.clientHeight / 2;
+
+    allItems.forEach((link) => {
+      const rect = link.getBoundingClientRect();
+      const linkCenter = rect.top + rect.height / 2;
+      const distance = Math.abs(centerY - linkCenter);
+      const ratio = Math.min(distance / (container.clientHeight / 2), 1);
+
+      const scale = 1 - ratio * 0.9;
+      const opacity = 1 - ratio * 1.2;
+
+      link.style.transform = `scale(${scale})`;
+      link.style.opacity = opacity.toFixed(2);
+
+      const overlay = link.querySelector(".overlay");
+      if (Math.abs(linkCenter - centerY) < container.clientHeight / 5) {
+        overlay.style.display = "none";
+        link.classList.add('selected');
+        link.style.pointerEvents = 'all';  // Umožnit kliknutí
+      } else {
+        overlay.style.display = "block"; 
+        link.classList.remove('selected');
+        link.style.pointerEvents = 'none';  // Zakázat kliknutí
+      }
+
+      // Změna opacity čísla podle toho, jak je téma blízko středu
+      const numberOverlay = link.querySelector(".number-overlay");
+      if (Math.abs(linkCenter - centerY) < container.clientHeight / 5) {
+        numberOverlay.style.color = "rgba(255, 255, 255, 0.6)";  // Vysoká opacita, pokud je téma ve středu
+      } else {
+        numberOverlay.style.color = "rgba(255, 255, 255, 0)";  // Nižší opacita, pokud není ve středu
+      }
+    });
+  }
+
+  // Při kliknutí na téma
+  allItems.forEach((item) => {
+    item.addEventListener('click', (event) => {
+      event.preventDefault(); // Zabráníme defaultnímu chování odkazu
+
+      const rect = item.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const centerY = containerRect.top + containerRect.height / 2;
+
+      // Pokud je téma ve středu, přesměrujeme na stránku
+      if (Math.abs(rect.top + rect.height / 2 - centerY) < containerRect.height / 4) {
+        window.location.href = item.href;
+      } else {
+        // Pokud není ve středu, scrollujeme ji do středu
+        item.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  });
+
+  // Scroll událost + loop efekt
+  container.addEventListener("scroll", () => {
+    updateEffects();
+
+    const scrollTop = container.scrollTop;
+    const scrollHeight = container.scrollHeight;
+    const containerHeight = container.clientHeight;
+    const threshold = ITEM_HEIGHT * 2;
+
+    if (scrollTop < threshold) {
+      container.scrollTop += topics.length * ITEM_HEIGHT;
+    }
+
+    if (scrollTop + containerHeight + threshold > scrollHeight) {
+      container.scrollTop -= topics.length * ITEM_HEIGHT;
+    }
+  });
+</script>
+
+</body>
+</html>
