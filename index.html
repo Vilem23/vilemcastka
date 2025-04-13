@@ -244,7 +244,7 @@ window.addEventListener('scroll', () => {
 <script>
   const topics = ["ZÁKLADY", "KONÍČKY", "FILMY", "ZÁLIBY", "RODINA"];
   const container = document.getElementById("scrollContainer");
-  const LOOP_COUNT = 100;
+  const LOOP_COUNT = 10;
   const ITEM_HEIGHT = 20;
   let allItems = [];
 
@@ -273,9 +273,11 @@ window.addEventListener('scroll', () => {
 
   // Inicializace výchozího scrollu
   window.addEventListener("load", () => {
-    const middleIndex = Math.floor(allItems.length / 2);
-    updateEffects();
-  });
+  const middleIndex = Math.floor(allItems.length / 2);
+  const targetItem = allItems[middleIndex];
+  targetItem.scrollIntoView({ behavior: "auto", block: "center" });
+  updateEffects();
+});
 
   // Efekt opacity a scale
   function updateEffects() {
