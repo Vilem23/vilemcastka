@@ -272,7 +272,7 @@ window.addEventListener('scroll', () => {
   }
 
   // Inicializace výchozího scrollu
-  window.addEventListener("load", () => {
+window.addEventListener("load", () => {
   const middleIndex = Math.floor(allItems.length / 2);
   const targetItem = allItems[middleIndex];
   targetItem.scrollIntoView({ behavior: "auto", block: "center" });
