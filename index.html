@@ -12,8 +12,8 @@
       <nav class="nav">
         <button data-section="section1"><a href="#section1">ÚVOD</a></button>
         <button data-section="section2"><a href="#section2">O MNĚ</a></button>
-        <button data-section="section3">STUDIUM</button>
-        <button data-section="section4">PROJEKTY</button>
+        <button data-section="section3"><a href="#section3">STUDIUM</a></button>
+        <button data-section="section4"><a href="#section4">PROJEKTY</a></button>
       </nav>
     </nav>
   </header>
@@ -29,9 +29,7 @@
         <h2>VILÉM</h2>
       </div>
 
-      <div class="flexbox-p">
       <img src="index/img/vilem.png" class="person">
-      </div>
 
       <div class="social-icons">
         <a href="#"><img src="index/logos/instagram.png" alt="Instagram"></a>
@@ -47,20 +45,62 @@
     </section>
     <section id="section2">
       <div class="flexbox1">
-        <video class="background2" autoplay loop muted>
-          <source src="index/img/background2.mp4" type="video/mp4">
-        </video>
+        <img src="index/img/background.png" alt="Pozadí" class="background">
 
         <div class="hero-text2">
           <h1>NĚCO</h1>
           <h2>O MNĚ</h2>
-          <div class="hero-text2-p">
-          <p>Ahoj, jmenuji se Vilém Čstka, narodil jsem se rok 2008 v prosinci, jsem začínající programátor studující vývoj počítačovích technologií a tvorbu her. Vyber si sekci, kterou se chceš o mě dozvědět!</p>
+
+          <div class="rotator-wrapper">
+            <div class="arrow up">▲</div>
+          
+            <div class="rotator">
+              <div class="item" data-url="zaliby.html">ZÁLIBY</div>
+              <div class="item" data-url="konicky.html">KONÍČKY</div>
+              <div class="item active" data-url="zaklady.html">ZÁKLADY</div>
+              <div class="item" data-url="filmy.html">FILMY</div>
+              <div class="item" data-url="rodina.html">RODINA</div>
+            </div>
+          
+            <div class="arrow down">▼</div>
+          </div>
+          
+
+      </div>
+      
+    </section>
+    <section id="section3">
+      <div class="flexbox2">
+        <img src="index/img/background2.png" alt="Pozadí" class="background" style="opacity: 0.5;">
+
+        <div class="hero-text2">
+          <h2>STUDIUM</h2>
+
+      </div>
+
+      <div class="selection-locator">
+        <div class="selection-flexbox">
+          <div class="row">
+          <div class="selection-s">
+            <img src="index/img/select-s/s1.png">
+            
+          </div>
+          <div class="selection-s">
+            <img src="index/img/select-s/s2.png">
+          </div>
         </div>
-      </div>
-      <div class="flexbox-s">
-      <section class="scroll-container" id="scrollContainer"></section>
-      </div>
+        <div class="row">
+          <div class="selection-s">
+            <img src="index/img/select-s/s4.png">
+          </div>
+          <div class="selection-s">
+            <img src="index/img/select-s/s3.png">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div> 
+
     </section>
   </main>
 
@@ -237,122 +277,6 @@ window.addEventListener('scroll', () => {
     }
   });
 });
-
-
   </script>
-
-<script>
-  const topics = ["ZÁKLADY", "KONÍČKY", "FILMY", "ZÁLIBY", "RODINA"];
-  const container = document.getElementById("scrollContainer");
-  const LOOP_COUNT = 10;
-  const ITEM_HEIGHT = 20;
-  let allItems = [];
-
-  // Vytvoření položek
-  for (let i = 0; i < LOOP_COUNT; i++) {
-    topics.forEach((topic, index) => {
-      const link = document.createElement("a");
-      link.className = "scroll-items";
-      link.href = `${topic}.html`; // Odkaz na stránku s tématem
-      link.innerHTML = topic;
-      
-      // Vytvoření čísla 1/5 až 5/5
-      const numberOverlay = document.createElement("div");
-      numberOverlay.className = "number-overlay";
-      numberOverlay.innerHTML = `${index + 1}/5`;  // Číslo tématu
-      link.appendChild(numberOverlay);
-
-      const overlay = document.createElement("div");
-      overlay.className = "overlay";
-      link.appendChild(overlay);
-
-      container.appendChild(link);
-      allItems.push(link);
-    });
-  }
-
-  // Inicializace výchozího scrollu
-window.addEventListener("load", () => {
-  const middleIndex = Math.floor(allItems.length / 2);
-  const targetItem = allItems[middleIndex];
-  targetItem.scrollIntoView({ behavior: "auto", block: "center" });
-  updateEffects();
-});
-
-  // Efekt opacity a scale
-  function updateEffects() {
-    const centerY = container.getBoundingClientRect().top + container.clientHeight / 2;
-
-    allItems.forEach((link) => {
-      const rect = link.getBoundingClientRect();
-      const linkCenter = rect.top + rect.height / 2;
-      const distance = Math.abs(centerY - linkCenter);
-      const ratio = Math.min(distance / (container.clientHeight / 2), 1);
-
-      const scale = 1 - ratio * 0.9;
-      const opacity = 1 - ratio * 1.2;
-
-      link.style.transform = `scale(${scale})`;
-      link.style.opacity = opacity.toFixed(2);
-
-      const overlay = link.querySelector(".overlay");
-      if (Math.abs(linkCenter - centerY) < container.clientHeight / 5) {
-        overlay.style.display = "none";
-        link.classList.add('selected');
-        link.style.pointerEvents = 'all';  // Umožnit kliknutí
-      } else {
-        overlay.style.display = "block"; 
-        link.classList.remove('selected');
-        link.style.pointerEvents = 'none';  // Zakázat kliknutí
-      }
-
-      // Změna opacity čísla podle toho, jak je téma blízko středu
-      const numberOverlay = link.querySelector(".number-overlay");
-      if (Math.abs(linkCenter - centerY) < container.clientHeight / 5) {
-        numberOverlay.style.color = "rgba(255, 255, 255, 0.6)";  // Vysoká opacita, pokud je téma ve středu
-      } else {
-        numberOverlay.style.color = "rgba(255, 255, 255, 0)";  // Nižší opacita, pokud není ve středu
-      }
-    });
-  }
-
-  // Při kliknutí na téma
-  allItems.forEach((item) => {
-    item.addEventListener('click', (event) => {
-      event.preventDefault(); // Zabráníme defaultnímu chování odkazu
-
-      const rect = item.getBoundingClientRect();
-      const containerRect = container.getBoundingClientRect();
-      const centerY = containerRect.top + containerRect.height / 2;
-
-      // Pokud je téma ve středu, přesměrujeme na stránku
-      if (Math.abs(rect.top + rect.height / 2 - centerY) < containerRect.height / 4) {
-        window.location.href = item.href;
-      } else {
-        // Pokud není ve středu, scrollujeme ji do středu
-        item.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    });
-  });
-
-  // Scroll událost + loop efekt
-  container.addEventListener("scroll", () => {
-    updateEffects();
-
-    const scrollTop = container.scrollTop;
-    const scrollHeight = container.scrollHeight;
-    const containerHeight = container.clientHeight;
-    const threshold = ITEM_HEIGHT * 2;
-
-    if (scrollTop < threshold) {
-      container.scrollTop += topics.length * ITEM_HEIGHT;
-    }
-
-    if (scrollTop + containerHeight + threshold > scrollHeight) {
-      container.scrollTop -= topics.length * ITEM_HEIGHT;
-    }
-  });
-</script>
-
 </body>
 </html>

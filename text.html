@@ -1,25 +1,98 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nekonečný výběr</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Témata</title>
   <style>
     * {
       box-sizing: border-box;
     }
 
     body {
+      margin: 0;
+      background: #111;
+      font-family: sans-serif;
+      color: white;
+      overflow-x: hidden;
     }
 
+    .carousel-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 100px 0;
+      justify-content: center;
+      align-items: center;
+      gap: 4rem;
+      scroll-behavior: smooth;
+    }
+
+    .carousel-item {
+      scroll-snap-align: center;
+      flex: 0 0 auto;
+      font-size: 2rem;
+      opacity: 0.4;
+      transition: all 0.4s ease;
+      text-align: center;
+      cursor: pointer;
+      color: white;
+      text-decoration: none;
+      min-width: 120px;
+      pointer-events: none; /* Neaktivní položky nejsou klikatelné */
+    }
+
+    .carousel-item.active {
+      font-size: 4rem;
+      opacity: 1;
+      font-weight: bold;
+      pointer-events: auto; /* Aktivní položka je klikací */
+    }
   </style>
 </head>
 <body>
 
-  <video width="640" height="360" controls>
-    <source src="video/back.mp4" type="video/mp4">
-    Váš prohlížeč nepodporuje video tag.
-  </video>
-  
+  <div class="carousel-container" id="carousel">
+    <a href="#zaliby" class="carousel-item">ZÁLIBY</a>
+    <a href="#konicky" class="carousel-item">KONÍČKY</a>
+    <a href="#zaklady" class="carousel-item">ZÁKLADY</a>
+    <a href="#filmy" class="carousel-item">FILMY</a>
+    <a href="#rodina" class="carousel-item">RODINA</a>
+  </div>
+
+  <script>
+    const container = document.getElementById('carousel');
+    const items = container.querySelectorAll('.carousel-item');
+
+    function updateActiveItem() {
+      let center = container.offsetWidth / 2;
+      let minDiff = Infinity;
+      let activeItem = null;
+
+      items.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        const itemCenter = rect.left + rect.width / 2;
+        const diff = Math.abs(center - itemCenter);
+
+        if (diff < minDiff) {
+          minDiff = diff;
+          activeItem = item;
+        }
+      });
+
+      items.forEach(item => item.classList.remove('active'));
+      if (activeItem) activeItem.classList.add('active');
+    }
+
+    container.addEventListener('scroll', () => {
+      requestAnimationFrame(updateActiveItem);
+    });
+
+    window.addEventListener('load', () => {
+      setTimeout(updateActiveItem, 100); // inicializace po načtení
+    });
+  </script>
+
 </body>
 </html>
