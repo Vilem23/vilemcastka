@@ -1,98 +1,114 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Témata</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scroll Selector</title>
   <style>
-    * {
-      box-sizing: border-box;
+    :root {
+      --item-height: 60px;
+      --item-gap: 10px;
+      --container-height: calc((var(--item-height) * 7) + (var(--item-gap) * 6));
+      --top-padding: calc((var(--container-height) - var(--item-height)) / 2);
     }
 
     body {
+      height: 100vh;
       margin: 0;
-      background: #111;
-      font-family: sans-serif;
-      color: white;
-      overflow-x: hidden;
+      display: grid;
+      place-content: center;
+      font-family: 'Poppins', sans-serif;
+      background: #fdfbf0;
+      user-select: none;
     }
 
-    .carousel-container {
+    .scroll-container {
+      width: 400px;
+      height: var(--container-height);
       display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      padding: 100px 0;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      gap: 4rem;
-      scroll-behavior: smooth;
+      row-gap: var(--item-gap);
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      overscroll-behavior-y: none;
+      position: absolute;
+
+      /* Hide scrollbar */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE */
     }
 
-    .carousel-item {
-      scroll-snap-align: center;
-      flex: 0 0 auto;
-      font-size: 2rem;
-      opacity: 0.4;
-      transition: all 0.4s ease;
+    .scroll-container::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
+    }
+
+    .scroll-items {
+      width: 90%;
+      flex: 0 0 var(--item-height);
+      box-sizing: border-box;
+      padding-inline: 20px;
+      border-radius: 4px;
       text-align: center;
-      cursor: pointer;
-      color: white;
-      text-decoration: none;
-      min-width: 120px;
-      pointer-events: none; /* Neaktivní položky nejsou klikatelné */
+      font-size: 16pt;
+      line-height: var(--item-height);
+      opacity: 0.5;
+      transition: transform 0.3s, font-size 0.3s, opacity 0.3s;
+      scroll-snap-align: center;
+      pointer-events: none;
+      position: relative;
     }
 
-    .carousel-item.active {
-      font-size: 4rem;
+    .scroll-items:has(:checked) {
+      font-size: 20pt;
+      transform: scale(1.3);
       opacity: 1;
+      z-index: 1;
       font-weight: bold;
-      pointer-events: auto; /* Aktivní položka je klikací */
+    }
+
+    .scroll-items:first-of-type {
+      margin-top: var(--top-padding);
+    }
+
+    .scroll-items:last-of-type {
+      margin-bottom: var(--top-padding);
+    }
+
+    .scroll-items input {
+      appearance: none;
     }
   </style>
 </head>
 <body>
-
-  <div class="carousel-container" id="carousel">
-    <a href="#zaliby" class="carousel-item">ZÁLIBY</a>
-    <a href="#konicky" class="carousel-item">KONÍČKY</a>
-    <a href="#zaklady" class="carousel-item">ZÁKLADY</a>
-    <a href="#filmy" class="carousel-item">FILMY</a>
-    <a href="#rodina" class="carousel-item">RODINA</a>
-  </div>
+  <section class="scroll-container">
+    <label class="scroll-items">Madrid<input type="radio" name="items" /></label>
+    <label class="scroll-items">Malta<input type="radio" name="items" /></label>
+    <label class="scroll-items">Manchester<input type="radio" name="items" /></label>
+    <label class="scroll-items">Manila<input type="radio" name="items" /></label>
+    <label class="scroll-items">Marseille<input type="radio" name="items" /></label>
+  </section>
 
   <script>
-    const container = document.getElementById('carousel');
-    const items = container.querySelectorAll('.carousel-item');
+    const scrollContainer = document.querySelector('.scroll-container');
+    const items = document.querySelectorAll('.scroll-items');
 
-    function updateActiveItem() {
-      let center = container.offsetWidth / 2;
-      let minDiff = Infinity;
-      let activeItem = null;
-
-      items.forEach(item => {
-        const rect = item.getBoundingClientRect();
-        const itemCenter = rect.left + rect.width / 2;
-        const diff = Math.abs(center - itemCenter);
-
-        if (diff < minDiff) {
-          minDiff = diff;
-          activeItem = item;
+    // Observer to auto-check the centered item
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelector('input').checked = true;
         }
       });
-
-      items.forEach(item => item.classList.remove('active'));
-      if (activeItem) activeItem.classList.add('active');
-    }
-
-    container.addEventListener('scroll', () => {
-      requestAnimationFrame(updateActiveItem);
+    }, {
+      root: scrollContainer,
+      rootMargin: '-51% 0px -49% 0px'
     });
 
-    window.addEventListener('load', () => {
-      setTimeout(updateActiveItem, 100); // inicializace po načtení
-    });
+    items.forEach(item => observer.observe(item));
+
+    // Start on 3rd item
+    items[2].scrollIntoView({ block: "center", behavior: "instant" });
   </script>
-
 </body>
 </html>
