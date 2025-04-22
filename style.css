@@ -86,7 +86,7 @@ body {
 
 .hero-text {
   position: absolute;
-  top: 2%;
+  top: 1rem;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -107,19 +107,27 @@ body {
   font-family: title;
 }
 
-.person {
+.person-locator {
+  width: 100%;
   position: absolute;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+}
+
+.person {
+  display: flex;
   top: 100px;
-  left: 55%;
-  transform: translateX(-50%);
   width: 600px;
   object-fit: contain;
   z-index: 2;
+  position: relative;
+  left: 30px;
 }
 
 .social-icons {
   position: absolute;
-  top: 30%;
+  top: 35%;
   left: 1rem;
   z-index: 3;
   display: flex;
@@ -132,15 +140,23 @@ body {
   height: 40px;
 }
 
+.buttons-locator {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  justify-content: center;
+  align-items: end;
+  display: flex;
+}
+
 .buttons {
   position: absolute;
-  bottom: 8rem;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   z-index: 3;
+  bottom: 6rem;
   font-family: buttons;
 }
 
@@ -239,6 +255,16 @@ body {
   z-index: 10;
   display: flex;
   position: relative;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text1 {
+  width: 75%;
+  font-size: 5vw;
+  padding: 1rem;
+  text-align: center;
+  font-family: buttons;
 }
 
 .flexbox2 {
@@ -343,7 +369,7 @@ body {
   font-family: buttons;
   overflow-x: hidden;
   width: 250px;
-  height: var(--container-height);
+  height: 19rem;
   display: flex;
   flex-direction: column;
   align-items: center;
