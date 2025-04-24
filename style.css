@@ -369,7 +369,6 @@ body {
 }
 
 .icon-hand {
-  width: 30%;
   height: 200px; /* nebo jiná výška podle potřeby */
   display: flex; /* musí být flex */
   align-items: center; /* vertikální zarovnání */
@@ -383,6 +382,18 @@ body {
   max-width: 100%;
   height: auto;
   transform: rotate(90deg);
+  left: 4px;
+  position: relative;
+  animation: hand 2s linear infinite;
+}
+
+@keyframes hand {
+  0%, 100% {  
+      opacity: 0;
+  }
+  50% {
+      opacity: 0.5;
+  }
 }
 
 :root {
@@ -421,7 +432,7 @@ body {
 }
 
 .scroll-items {
-  width: 100%;
+  width: 160px;
   flex: 0 0 var(--item-height);
   box-sizing: border-box;
   padding-inline: 20px;
