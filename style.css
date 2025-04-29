@@ -261,7 +261,7 @@ body {
 
 .text1 {
   width: 75%;
-  font-size: 2.5vh;
+  font-size: 5vw;
   padding: 1rem;
   text-align: center;
   font-family: buttons;
@@ -358,44 +358,6 @@ body {
   object-fit: fill;
 }
 
-.section2-1 {
-  width: 100%;
-  position: relative;
-  z-index: 100;
-  flex-direction: row;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.icon-hand {
-  height: 200px; /* nebo jiná výška podle potřeby */
-  display: flex; /* musí být flex */
-  align-items: center; /* vertikální zarovnání */
-  justify-content: center; /* horizontální zarovnání */
-  position: relative;
-}
-
-.icon-hand img {
-  object-fit: cover;
-  width: 80px;
-  max-width: 100%;
-  height: auto;
-  transform: rotate(90deg);
-  left: 4px;
-  position: relative;
-  animation: hand 2s linear infinite;
-}
-
-@keyframes hand {
-  0%, 100% {  
-      opacity: 0;
-  }
-  50% {
-      opacity: 0.5;
-  }
-}
-
 :root {
   --item-height: 50px;
   --item-gap: 10px;
@@ -406,7 +368,7 @@ body {
 .scroll-container {
   font-family: buttons;
   overflow-x: hidden;
-  width: 160px;
+  width: 250px;
   height: 19rem;
   display: flex;
   flex-direction: column;
@@ -416,11 +378,9 @@ body {
   scroll-snap-type: y mandatory;
   overscroll-behavior-y: none;
   position: relative;
-  right: 10px;
+  margin-left: auto;
+  margin-right: auto;
   z-index: 10;
-  background-image: url(index/img/fade.png);
-  background-size: 100% 100%;   /* 👈 Stretch na celou šířku i výšku */
-  background-repeat: no-repeat;
 
   /* Hide scrollbar */
   scrollbar-width: none; /* Firefox */
@@ -432,7 +392,7 @@ body {
 }
 
 .scroll-items {
-  width: 160px;
+  width: 100%;
   flex: 0 0 var(--item-height);
   box-sizing: border-box;
   padding-inline: 20px;
