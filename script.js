@@ -113,4 +113,4 @@ const observer = new IntersectionObserver(entries => {
 items.forEach(item => observer.observe(item));
 
 // Start on 3rd item
-items[2].scrollIntoView({ block: "center", behavior: "instant" });
+items[2].scrollIntoView({ block: "center", behavior: "auto" });
