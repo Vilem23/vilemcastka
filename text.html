@@ -1,104 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Scroll Selector</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projekty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --item-height: 60px;
-      --item-gap: 10px;
-      --container-height: calc((var(--item-height) * 7) + (var(--item-gap) * 6));
-      --top-padding: calc((var(--container-height) - var(--item-height)) / 2);
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: url('pozadi.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
     }
 
-    .scroll-container {
-      width: 400px;
-      height: var(--container-height);
+    header {
+      padding: 20px;
+      text-transform: uppercase;
+      font-size: 24px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .folders {
       display: flex;
       flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .folder {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
       align-items: center;
-      row-gap: var(--item-gap);
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-      overscroll-behavior-y: none;
-      position: absolute;
-
-      /* Hide scrollbar */
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* IE */
+      justify-content: space-between;
+      font-size: 18px;
+      border: 1px solid white;
     }
 
-    .scroll-container::-webkit-scrollbar {
-      display: none; /* Chrome/Safari */
+    .folder img {
+      width: 40px;
+      height: 40px;
     }
 
-    .scroll-items {
-      width: 90%;
-      flex: 0 0 var(--item-height);
-      box-sizing: border-box;
-      padding-inline: 20px;
-      border-radius: 4px;
-      text-align: center;
-      font-size: 16pt;
-      line-height: var(--item-height);
-      opacity: 0.5;
-      transition: transform 0.3s, font-size 0.3s, opacity 0.3s;
-      scroll-snap-align: center;
-      pointer-events: none;
-      position: relative;
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
     }
 
-    .scroll-items:has(:checked) {
-      font-size: 20pt;
-      transform: scale(1.3);
-      opacity: 1;
-      z-index: 1;
-      font-weight: bold;
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      text-transform: uppercase;
     }
 
-    .scroll-items:first-of-type {
-      margin-top: var(--top-padding);
-    }
-
-    .scroll-items:last-of-type {
-      margin-bottom: var(--top-padding);
-    }
-
-    .scroll-items input {
-      appearance: none;
+    .gear {
+      margin: 30px auto;
+      width: 60px;
+      height: 60px;
     }
   </style>
 </head>
 <body>
-  <section class="scroll-container">
-    <label class="scroll-items">Madrid<input type="radio" name="items" /></label>
-    <label class="scroll-items">Malta<input type="radio" name="items" /></label>
-    <label class="scroll-items">Manchester<input type="radio" name="items" /></label>
-    <label class="scroll-items">Manila<input type="radio" name="items" /></label>
-    <label class="scroll-items">Marseille<input type="radio" name="items" /></label>
-  </section>
+  <nav>
+    <a href="#">Úvod</a>
+    <a href="#">O mně</a>
+    <a href="#">Studium</a>
+    <a href="#">Projekty</a>
+    <a href="#">Kontaktuj mě</a>
+  </nav>
 
-  <script>
-    const scrollContainer = document.querySelector('.scroll-container');
-    const items = document.querySelectorAll('.scroll-items');
+  <header>Projekty</header>
 
-    // Observer to auto-check the centered item
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelector('input').checked = true;
-        }
-      });
-    }, {
-      root: scrollContainer,
-      rootMargin: '-51% 0px -49% 0px'
-    });
+  <img class="gear" src="gear-icon.png" alt="Gear">
 
-    items.forEach(item => observer.observe(item));
-
-    // Start on 3rd item
-    items[2].scrollIntoView({ block: "center", behavior: "instant" });
-  </script>
+  <div class="folders">
+    <div class="folder">První ročník <img src="folder-icon.png" alt="Složka"></div>
+    <div class="folder">Druhý ročník <img src="folder-icon.png" alt="Složka"></div>
+    <div class="folder">Třetí ročník <img src="folder-icon.png" alt="Složka"></div>
+    <div class="folder">Čtvrtý ročník <img src="folder-icon.png" alt="Složka"></div>
+  </div>
 </body>
 </html>
