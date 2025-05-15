@@ -1,91 +1,67 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projekty</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background: url('pozadi.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      text-align: center;
-    }
+  margin: 0;
+  font-family: sans-serif;
+}
 
-    header {
-      padding: 20px;
-      text-transform: uppercase;
-      font-size: 24px;
-      font-family: 'Playfair Display', serif;
-    }
+.scroll-container {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  overflow-y: scroll;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
 
-    .folders {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding: 20px;
-    }
+.item {
+  background-color: #eee;
+  padding: 20px;
+  margin: 5px 0;
+  border-radius: 4px;
+}
 
-    .folder {
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      padding: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 18px;
-      border: 1px solid white;
-    }
-
-    .folder img {
-      width: 40px;
-      height: 40px;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-around;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 10px 0;
-      position: sticky;
-      top: 0;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      text-transform: uppercase;
-    }
-
-    .gear {
-      margin: 30px auto;
-      width: 60px;
-      height: 60px;
-    }
   </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scroll ve Flexboxu</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <nav>
-    <a href="#">Úvod</a>
-    <a href="#">O mně</a>
-    <a href="#">Studium</a>
-    <a href="#">Projekty</a>
-    <a href="#">Kontaktuj mě</a>
-  </nav>
 
-  <header>Projekty</header>
-
-  <img class="gear" src="gear-icon.png" alt="Gear">
-
-  <div class="folders">
-    <div class="folder">První ročník <img src="folder-icon.png" alt="Složka"></div>
-    <div class="folder">Druhý ročník <img src="folder-icon.png" alt="Složka"></div>
-    <div class="folder">Třetí ročník <img src="folder-icon.png" alt="Složka"></div>
-    <div class="folder">Čtvrtý ročník <img src="folder-icon.png" alt="Složka"></div>
+  <div class="scroll-container">
+    <div class="item">Box 1</div>
+    <div class="item">Box 2</div>
+    <div class="item">Box 3</div>
+    <div class="item">Box 4</div>
+    <div class="item">Box 5</div>
+    <div class="item">Box 6</div>
+    <div class="item">Box 7</div>
+    <div class="item">Box 8</div>
+    <div class="item">Box 9</div>
+    <div class="item">Box 10</div>
   </div>
+
+  <script>
+    const scrollContainer = document.querySelector('.scroll-container');
+
+scrollContainer.addEventListener('scroll', () => {
+  const scrollTop = scrollContainer.scrollTop;
+  const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+  const ratio = scrollTop / scrollHeight;
+
+  // Měň barvu pozadí podle pozice
+  if (ratio < 0.33) {
+    scrollContainer.style.backgroundColor = '#ffe5e5'; // světle červená
+  } else if (ratio < 0.66) {
+    scrollContainer.style.backgroundColor = '#e5ffe5'; // světle zelená
+  } else {
+    scrollContainer.style.backgroundColor = '#e5e5ff'; // světle modrá
+  }
+});
+
+  </script>
 </body>
 </html>
