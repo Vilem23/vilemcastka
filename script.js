@@ -120,31 +120,16 @@ items[2].scrollIntoView({ block: "center", behavior: "instant" });
 const scrollMenu = document.getElementById('scrollmenu');
 const mainImage = document.getElementById('main-image');
 
-let currentState = '';
-
 scrollMenu.addEventListener('scroll', () => {
   const scrollLeft = scrollMenu.scrollLeft;
   const scrollWidth = scrollMenu.scrollWidth - scrollMenu.clientWidth;
   const scrollRatio = scrollLeft / scrollWidth;
 
-  let newSrc = '';
   if (scrollRatio < 0.3) {
-    newSrc = 'index/projekts/bg/1.webp';
+    mainImage.src = 'index/projekts/bg/1.webp';
   } else if (scrollRatio < 0.8) {
-    newSrc = 'index/projekts/bg/2.webp';
+    mainImage.src = 'index/projekts/bg/2.webp';
   } else if (scrollRatio < 1.2) {
-    newSrc = 'index/projekts/bg/3.jpeg';
+    mainImage.src = 'index/projekts/bg/3.jpeg';
   }
-
-  if (mainImage.src.endsWith(newSrc)) return; // Pokud je stejný, nic nedělej
-
-  // fade out
-  mainImage.style.opacity = '0';
-
-  setTimeout(() => {
-    mainImage.src = newSrc;
-
-    // fade in
-    mainImage.style.opacity = '0.7';
-  }, 300); // počkej chvíli, až obraz zmizí
 });
