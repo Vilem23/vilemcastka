@@ -582,10 +582,9 @@ body {
 }
 
 .piechart {
-  overflow: hidden;
   width: 35vh;
   height: 35vh;
-  border-radius: 50%;
+  border-radius: 300px;
   background-image: conic-gradient(
     #6EC1E4 0deg 140deg,
     #F6C667 140deg 250deg,
@@ -621,9 +620,5 @@ body {
   height: 25%;
   font-size: 25px;
   padding-left: 15px;
-  font-family: buttons;
-}
-
-.piechart p {
   font-family: buttons;
 }
