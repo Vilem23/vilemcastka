@@ -23,7 +23,6 @@ a {
 body {
   background: #000;
   color: white;
-  overflow-x: hidden;
 }
 
 #main {
@@ -583,6 +582,7 @@ body {
 }
 
 .piechart {
+  overflow: hidden;
   width: 35vh;
   height: 35vh;
   border-radius: 50%;
