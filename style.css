@@ -20,7 +20,7 @@ a {
   color: inherit;
 }
 
-body {
+body, html {
   background: #000;
   color: white;
   overflow-x: hidden;
