@@ -95,26 +95,6 @@ if (btn.dataset.section === currentSectionId) {
 });
 });
 
-const scrollContainer = document.querySelector('.scroll-container');
-const items = document.querySelectorAll('.scroll-items');
-
-// Observer to auto-check the centered item
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.querySelector('input').checked = true;
-    }
-  });
-}, {
-  root: scrollContainer,
-  rootMargin: '-51% 0px -49% 0px'
-});
-
-items.forEach(item => observer.observe(item));
-
-// Start on 3rd item
-items[2].scrollIntoView({ block: "center", behavior: "instant" });
-
 
 
 const scrollMenu = document.getElementById('scrollmenu');

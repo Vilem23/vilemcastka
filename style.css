@@ -20,7 +20,7 @@ a {
   color: inherit;
 }
 
-body, html {
+body {
   background: #000;
   color: white;
   overflow-x: hidden;
@@ -128,7 +128,6 @@ body, html {
 }
 
 .person {
-  overflow-x: hidden;
   display: flex;
   top: 100px;
   width: 600px;
