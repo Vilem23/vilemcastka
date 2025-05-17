@@ -88,6 +88,7 @@ body {
   height: 100vh;
   object-fit: cover;
   z-index: -1;
+  filter: blur(2px);
 }
 
 .hero-text {
@@ -111,6 +112,11 @@ body {
   font-size: 4rem;
   font-weight: bold;
   font-family: title;
+}
+
+.hero-text3 h3 {
+  font-size: 1rem;
+  font-family: buttons;
 }
 
 .person-locator {
@@ -384,14 +390,14 @@ body {
 .top-flexbox2{
   width: 100%;
   position: relative;
-  height: 20%;
+  height: 5%;
 }
 
 
 .button-flexbox {
   width: 100%;
   position: relative;
-  height: 50%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -399,19 +405,20 @@ body {
 }
 
 .button-s {
+  align-items: center;
+  display: flex;
   width: 80%;
   height: 25%;
   font-size: 40px;
-  justify-content: center;
-  align-items: center;
+  padding-left: 15px;
+  border-left: 2px solid white;
   font-family: buttons;
 }
 
 .flexbox3 {
-  padding-top: 100px;
   width: 100%;
   height: 100vh;
-  top: 70px;
+  top: 40px;
   z-index: 10;
   display: flex;
   position: relative;
@@ -424,7 +431,7 @@ body {
   left: 10px;
   position: relative;
   background-color: rgba(0, 0, 0, 0.3);
-  height: 90%;
+  height: 80%;
   overflow: auto;
   white-space: nowrap;
 }
@@ -484,9 +491,9 @@ body {
 
 #main-image {
   position: absolute;
-  top: 0;
   opacity: 0.7;
   left: 0;
+  top: -40px;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -494,4 +501,129 @@ body {
   transition: opacity 0.7s ease-in-out;
   filter: blur(3px);
   transition: opacity 0.7s ease-in-out, filter 0.5s ease-in-out;
+}
+
+.flexbox4 {
+  top: 50px;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+.buttons-locator2 {
+  width: 100%;
+  top: 230px;
+  position: absolute;
+  justify-content: center;
+  align-items: end;
+  display: flex;
+}
+
+.hero-text3 {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  color: white;
+  width: 60%;
+  text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.button {
+  top: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3;
+  font-family: buttons;
+}
+
+.arrows {
+  object-fit: cover;
+  width: 60%;
+  justify-content: center;
+  display: flex;
+}
+
+.arrows img {
+  width: 100%;
+}
+
+.buttom-box {
+  position: relative;
+  top: 70px;
+  width: 80%;
+  height: 20vh;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  font-family: buttons;
+}
+
+.buttom-box-title {
+  position: relative;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: end;
+  padding-bottom: 5px;
+  border-bottom: 1px solid white;
+  }
+
+.buttom-box-text {
+  padding-top: 5px;
+  position: relative;
+  width: 100%;
+  height: 90%;
+  display: flex;
+}
+
+.piechart {
+  width: 35vh;
+  height: 35vh;
+  border-radius: 50%;
+  background-image: conic-gradient(
+    #6EC1E4 0deg 140deg,
+    #F6C667 140deg 250deg,
+    #A1D99B 250deg 270deg,
+    #E78AC3 270deg 360deg
+  );
+  border: 3px solid white;
+}
+
+.pie-locator {
+  position: relative;
+  top: 50px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.button-p-box {
+  top: 60px;
+  width: 100%;
+  position: relative;
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-p {
+  align-items: center;
+  display: flex;
+  width: 80%;
+  height: 25%;
+  font-size: 25px;
+  padding-left: 15px;
+  font-family: buttons;
+}
+
+.piechart p {
+  font-family: buttons;
 }
