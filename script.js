@@ -106,7 +106,7 @@ scrollMenu.addEventListener('scroll', () => {
   const scrollRatio = scrollLeft / scrollWidth;
 
   if (scrollRatio < 0.3) {
-    mainImage.src = 'index/projekts/bg/1.webp';
+    mainImage.src = 'index/projekts/bg/1.gif';
   } else if (scrollRatio < 0.8) {
     mainImage.src = 'index/projekts/bg/2.webp';
   } else if (scrollRatio < 1.2) {
